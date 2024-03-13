@@ -2,6 +2,7 @@ plugins {
     `java-library`
     `kotlin-dsl`
     `maven-publish`
+    signing
 }
 
 allprojects {
@@ -13,6 +14,7 @@ allprojects {
     apply(plugin = "java-library")
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
+    apply(plugin = "signing")
 
     tasks.compileJava {
         options.encoding = "UTF-8"
@@ -72,6 +74,20 @@ allprojects {
                     password = System.getenv("MAVEN_PASSWORD")
                 }
             }
+        }
+    }
+
+    signing {
+        useInMemoryPgpKeys(
+            System.getenv("MAVEN_GPG_PRIVATE_KEY"),
+            System.getenv("MAVEN_GPG_PASSPHRASE")
+        )
+        sign(publishing.publications["maven"])
+    }
+
+    tasks.javadoc {
+        if (JavaVersion.current().isJava9Compatible) {
+            (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
         }
     }
 }
