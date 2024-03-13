@@ -15,5 +15,5 @@ sequenceOf(
 }
 
 
-rootProject.name = "Event"
+rootProject.name = "event-parent"
 
