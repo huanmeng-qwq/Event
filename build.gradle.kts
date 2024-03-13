@@ -66,7 +66,7 @@ allprojects {
         repositories {
             maven {
                 name = "central"
-                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
                     username = System.getenv("MAVEN_USERNAME")
                     password = System.getenv("MAVEN_PASSWORD")
