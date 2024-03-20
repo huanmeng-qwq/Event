@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     `java-library`
     `kotlin-dsl`
@@ -32,6 +34,12 @@ allprojects {
     java {
         withSourcesJar()
         withJavadocJar()
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlin {
+        compilerOptions.jvmTarget = JvmTarget.JVM_1_8
     }
 
     publishing {
@@ -39,6 +47,7 @@ allprojects {
             create<MavenPublication>("maven") {
                 from(components["java"])
                 pom {
+                    name = "Event"
                     groupId = group.toString()
                     artifactId = project.name
                     url = "https://github.com/huanmeng-qwq/Event"
@@ -78,9 +87,11 @@ allprojects {
     }
 
     signing {
+        val key = System.getenv("MAVEN_GPG_PRIVATE_KEY") ?: findProperty("MAVEN_GPG_PRIVATE_KEY")?.toString()
+        val pwd = System.getenv("MAVEN_GPG_PASSPHRASE") ?: findProperty("MAVEN_GPG_PASSPHRASE")?.toString()
         useInMemoryPgpKeys(
-            System.getenv("MAVEN_GPG_PRIVATE_KEY"),
-            System.getenv("MAVEN_GPG_PASSPHRASE")
+            key,
+            pwd
         )
         sign(publishing.publications["maven"])
     }
@@ -91,3 +102,4 @@ allprojects {
         }
     }
 }
+
