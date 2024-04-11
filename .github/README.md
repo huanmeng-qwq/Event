@@ -7,8 +7,8 @@ A library for quickly creating event managers based on [kyori/event](https://git
 build.gradle.kts
 
 ```kotlin
-implementation("com.huanmeng-qwq:event-core:1.0.2")
-// implementation("com.huanmeng-qwq:event-core-asm:1.0.2")
+implementation("com.huanmeng-qwq:event-core:1.0.3")
+// implementation("com.huanmeng-qwq:event-core-asm:1.0.3")
 ```
 
 <details>
@@ -16,7 +16,7 @@ implementation("com.huanmeng-qwq:event-core:1.0.2")
 <summary>build.gradle</summary>
 
 ```groovy
-implementation 'com.huanmeng-qwq:event-core:1.0.2'
+implementation 'com.huanmeng-qwq:event-core:1.0.3'
 ```
 
 </details>
@@ -31,12 +31,12 @@ implementation 'com.huanmeng-qwq:event-core:1.0.2'
 <dependency>
     <groupId>com.huanmeng-qwq</groupId>
     <artifactId>event-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
         <!--<dependency>
             <groupId>com.huanmeng-qwq</groupId>
             <artifactId>event-core-asm</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>-->
 ```
 
