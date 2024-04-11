@@ -7,7 +7,6 @@ repositories {
 
 dependencies {
     implementation(libs.indra)
-    //plugin cl.franciscosolis.sonatype-central-upload
     implementation("cl.franciscosolis.sonatype-central-upload:cl.franciscosolis.sonatype-central-upload.gradle.plugin:1.0.3")
     compileOnly(files(libs::class.java.protectionDomain.codeSource.location))
 }
