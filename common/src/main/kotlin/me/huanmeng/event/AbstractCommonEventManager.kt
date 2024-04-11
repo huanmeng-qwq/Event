@@ -28,7 +28,7 @@ abstract class AbstractCommonEventManager<E : Any, L : Any, A : Annotation>(
 
     protected abstract fun onUnregister(listener: L)
 
-    open fun callEvent(event: E): E {
+    protected open fun callEvent(event: E): E {
         eventBus.post(event).apply {
             if (!wasSuccessful()) {
                 doException(this)
@@ -44,12 +44,12 @@ abstract class AbstractCommonEventManager<E : Any, L : Any, A : Annotation>(
         }
     }
 
-    open fun register(listener: L) {
+    protected open fun register(listener: L) {
         onRegister(listener)
         methodSubscription.register(listener)
     }
 
-    open fun unregister(listener: L) {
+    protected open fun unregister(listener: L) {
         onUnregister(listener)
         methodSubscription.unregister(listener)
     }
