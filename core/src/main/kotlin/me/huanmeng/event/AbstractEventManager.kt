@@ -22,12 +22,14 @@ abstract class AbstractEventManager<E : Any, L : Any, A : Annotation>(
     methodScanner: MethodScanner<L>,
 ) : AbstractCommonEventManager<E, L, A>(eventClass, listenerClass, annotationClass, logger, methodScanner) {
 
-    final override val eventBus: EventBus<E> = SimpleEventBus(eventClass)
-    override val methodSubscription: MethodSubscriptionAdapter<L> = SimpleMethodSubscriptionAdapter(
-        eventBus,
-        MethodHandleEventExecutorFactory(),
-        methodScanner
-    )
+    override val eventBus: EventBus<E> = SimpleEventBus(eventClass)
+    override val methodSubscription: MethodSubscriptionAdapter<L> by lazy {
+        SimpleMethodSubscriptionAdapter(
+            eventBus,
+            MethodHandleEventExecutorFactory(),
+            methodScanner
+        )
+    }
 
     constructor(eventClass: Class<E>, listenerClass: Class<L>, annotationClass: Class<A>, logger: Logger) : this(
         eventClass,

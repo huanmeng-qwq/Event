@@ -17,12 +17,14 @@ abstract class AbstractASMEventManager<E : Any, L : Any, A : Annotation>(
     logger: Logger,
     methodScanner: MethodScanner<L>,
 ) : AbstractCommonEventManager<E, L, A>(eventClass, listenerClass, annotationClass, logger, methodScanner) {
-    final override val eventBus: EventBus<E> = SimpleEventBus(eventClass)
-    override val methodSubscription: MethodSubscriptionAdapter<L> = SimpleMethodSubscriptionAdapter(
-        eventBus,
-        ASMEventExecutorFactory(classLoader),
-        methodScanner
-    )
+    override val eventBus: EventBus<E> = SimpleEventBus(eventClass)
+    override val methodSubscription: MethodSubscriptionAdapter<L> by lazy {
+        SimpleMethodSubscriptionAdapter(
+            eventBus,
+            ASMEventExecutorFactory(classLoader),
+            methodScanner
+        )
+    }
 
     constructor(
         classLoader: ClassLoader,
