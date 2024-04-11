@@ -7,6 +7,7 @@ import net.kyori.event.method.MethodScanner
 import net.kyori.event.method.MethodSubscriptionAdapter
 import net.kyori.event.method.SimpleMethodSubscriptionAdapter
 import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * 2024/3/13<br>
@@ -17,13 +18,29 @@ abstract class AbstractEventManager<E : Any, L : Any, A : Annotation>(
     eventClass: Class<E>,
     listenerClass: Class<L>,
     annotationClass: Class<A>,
-    methodScanner: MethodScanner<L> = MethodScannerImpl(annotationClass),
-    logger: Logger
-) : AbstractCommonEventManager<E, L, A>(eventClass, listenerClass, annotationClass, methodScanner, logger) {
+    logger: Logger,
+    methodScanner: MethodScanner<L>,
+) : AbstractCommonEventManager<E, L, A>(eventClass, listenerClass, annotationClass, logger, methodScanner) {
+
     final override val eventBus: EventBus<E> = SimpleEventBus(eventClass)
     override val methodSubscription: MethodSubscriptionAdapter<L> = SimpleMethodSubscriptionAdapter(
         eventBus,
         MethodHandleEventExecutorFactory(),
         methodScanner
+    )
+
+    constructor(eventClass: Class<E>, listenerClass: Class<L>, annotationClass: Class<A>, logger: Logger) : this(
+        eventClass,
+        listenerClass,
+        annotationClass,
+        logger,
+        MethodScannerImpl(annotationClass)
+    )
+
+    constructor(eventClass: Class<E>, listenerClass: Class<L>, annotationClass: Class<A>) : this(
+        eventClass,
+        listenerClass,
+        annotationClass,
+        LoggerFactory.getLogger("EventManager"),
     )
 }
