@@ -3,8 +3,9 @@ plugins {
 }
 
 dependencies {
-    api(project(":event-core"))
-    compileOnly(libs.event.api)
-    compileOnly(libs.event.method.asm)
+    api(project(":event-core")) {
+        exclude(group = "net.kyori", module = "event-method")
+    }
+    api(libs.event.method.asm)
     compileOnly(libs.slf4j.api)
 }

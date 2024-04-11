@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.event.api)
-    compileOnly(libs.event.method)
+    api(libs.event.api)
+    api(libs.event.method)
     compileOnly(libs.slf4j.api)
 }

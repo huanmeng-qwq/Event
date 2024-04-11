@@ -1,3 +1,6 @@
+import groovy.util.Node
+import groovy.util.NodeList
+
 plugins {
     `maven-publish`
     `java-library`
@@ -26,6 +29,16 @@ indra {
                     id = "huanmeng-qwq"
                     name = "huanmeng_qwq"
                     email = "huanmeng@huanmeng-qwq.com"
+                }
+            }
+            withXml {
+                project.configurations.compileOnly.get().allDependencies.forEach { dep ->
+                    ((asNode().get("dependencies") as NodeList)[0] as Node).appendNode("dependency").apply {
+                        appendNode("groupId", dep.group)
+                        appendNode("artifactId", dep.name)
+                        appendNode("version", dep.version)
+                        appendNode("scope", "provided")
+                    }
                 }
             }
         }
@@ -75,5 +88,5 @@ tasks.sonatypeCentralUpload {
     this.signingKeyPassphrase = privateKeyPwd
     this.publicKey = publicKey
     archives = project.layout.buildDirectory.dir("libs").get().asFileTree
-    pom = file("build/publications/maven/pom-default.xml")
+    pom = file(project.layout.buildDirectory.file("publications/maven/pom-default.xml"))
 }

@@ -7,7 +7,7 @@ server8 = "1.8.8-R0.1-SNAPSHOT"
 [libraries]
 
 event-api = { group = "net.kyori", name = "event-api", version.ref = "event" }
-event-method = { group = "net.kyori", name = "event-method-asm", version.ref = "event" }
+event-method = { group = "net.kyori", name = "event-method", version.ref = "event" }
 event-method-asm = { group = "net.kyori", name = "event-method-asm", version.ref = "event" }
 
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
