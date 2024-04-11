@@ -54,7 +54,7 @@ class SimpleEventManager extends AbstractEventManager<Event, Listener, EventHand
 }
 
 class SimpleASMEventManager extends AbstractASMEventManager<Event, Listener, EventHandler> {
-    public SimpleEventManager(ClassLoader classLoader) {
+    public SimpleASMEventManager(ClassLoader classLoader) {
         super(classLoader, Event.class, Listener.class, EventHandler.class);
     }
     // ...
