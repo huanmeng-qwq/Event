@@ -1,6 +1,6 @@
 [versions]
 event = "3.0.0"
-slf4j = "2.0.13"
+slf4j = "2.0.14"
 
 server8 = "1.8.8-R0.1-SNAPSHOT"
 
